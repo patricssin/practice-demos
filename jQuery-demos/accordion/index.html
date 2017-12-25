@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手风琴</title>
+	<style>
+	*{margin: 0;padding: 0;box-sizing: border-box;}
+	ul{list-style: none;}
+	#accordion{
+		width: 500px;
+		height: 500px;
+		margin: 100px auto;
+		border: 3px solid #fff;
+		position: relative;
+		overflow: hidden;
+	}
+	#accordion .img{
+		width: 100px;
+		height: 100px;
+		border-right: 3px solid #fff;
+		border-bottom: 3px solid #fff;
+		position: absolute;
+		left: 0;
+		top: 0;
+		overflow: hidden;
+	}
+	</style>
+</head>
+<body>
+	<div id="accordion">
+		<div class="img" style="background: url(images/1.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/2.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/3.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/4.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/1.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/2.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/3.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/4.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/1.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/2.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/3.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/4.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/1.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/2.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/3.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/4.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/1.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/2.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/3.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/4.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/1.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/2.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/3.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/4.jpg) center center no-repeat;"></div>
+		<div class="img" style="background: url(images/4.jpg) center center no-repeat;"></div>
+	</div>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script>
+		var $accordion = $("#accordion");
+		var $lis = $accordion.find(".img");
+		var idx = 0;
+		$lis.each(function(index){
+			$(this).css({
+				"width": 100,
+				"height":100,
+				"left": index%5 * 100,
+				"top": parseInt(index/5) *100
+			});
+			
+		});
+
+		function setAllEle(){
+			$lis.each(function(index){
+			$(this).stop(true).animate({
+				"width": index % 5 == idx % 5 ? 200 : 75,
+				"height": parseInt(index/5) == parseInt(idx/5) ? 200 : 75,
+				"left": index % 5 > idx % 5 ? 200 + (index%5 - 1)*75 : index%5*75,
+				"top": parseInt(index/5) <= parseInt(idx/5) ? parseInt(index/5)*75 : 200 + (parseInt(index /5) - 1)*75
+			}, 1000)
+		});
+		}
+
+		var timer = setInterval(function(){
+			setAllEle();
+			idx++;
+			if(idx>24) idx=0;
+		}, 1000);
+
+		$accordion.delegate(".img","mouseenter",function(){
+			clearInterval(timer);
+			idx = $(this).index();
+			setAllEle();
+		});
+		$accordion.mouseleave(function(){
+			timer = setInterval(function(){
+				setAllEle();
+				idx++;
+				if(idx>24) idx=0;
+			}, 1000);
+		});
+	</script>
+</body>
+</html>
