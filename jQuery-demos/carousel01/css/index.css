@@ -1,0 +1,126 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+body{
+	font-size: 12px;
+}
+
+#carousel{
+	width: 980px;
+	height: 380px;
+	position: relative;
+	margin: 100px auto;
+}
+.images{
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 980px;
+	height: 380px;
+	overflow: hidden;
+
+}
+.images .iunit{
+	width: 8000px;
+	height: 380px;
+	position: absolute;
+}
+.images .iunit li{
+	float: left;
+}
+
+.nav{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 270px;
+	height: 380px;
+	overflow: hidden;
+}
+.nav .nunit{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 270px;
+	height: 8000px;
+}
+.nav .nunit li{
+	width: 260px;
+	height: 59px;
+	background-color: rgba(0,0,0,0.08);
+	padding-left: 10px;
+	padding-top: 10px;
+	overflow: hidden;
+	border-bottom: 1px solid #eee;
+}
+.nav .nunit li.cur{
+	background-color: rgba(255,255,255,0.8) !important;
+	color: #000 !important;
+}
+.nav .nunit li.cur a{
+	color: #222;
+}
+.nav .nunit li img{
+	float: left;
+	margin-right: 10px;
+	opacity: 0.8;
+}
+.nav .nunit li.cur img{
+	opacity: 1;
+}
+.nav .nunit li .title{
+	float: left;
+	font-weight: bold;
+}
+.nav .nunit li .descrip{
+	float: left;
+	padding-top: 10px;
+}
+
+.sub_nav{
+	position: absolute;
+	width: 130px
+	height:15px;
+	padding-top: 5px;
+	right: 150px;
+	bottom: 10px;
+}
+.sub_nav li{
+	float: left;
+	width: 10px;
+	height: 10px;
+	margin-right: 10px;
+	border-radius: 5px;
+	background-color: #fff;
+}
+.sub_nav li.cur{
+	background-color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

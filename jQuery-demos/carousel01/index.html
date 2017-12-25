@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div id="carousel">
+		<div class="images">
+			<ul class="iunit">
+				<li><img src="images/a1.png" alt=""></li>
+				<li><img src="images/a2.png" alt=""></li>
+				<li><img src="images/a3.png" alt=""></li>
+				<li><img src="images/a4.png" alt=""></li>
+				<li><img src="images/a5.png" alt=""></li>
+				<li><img src="images/a6.png" alt=""></li>
+			</ul>
+		</div>
+
+		<div class="nav">
+			<ul class="nunit">
+				<li class="cur">
+					<a href="javascript:;">
+						<img src="images/a1x.png" alt="">
+						<span class="title">Title</span><br>
+						<span class="descrip">Description</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="images/a2x.png" alt="">
+						<span class="title">Title</span><br>
+						<span class="descrip">Description</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="images/a3x.png" alt="">
+						<span class="title">Title</span><br>
+						<span class="descrip">Description</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="images/a4x.png" alt="">
+						<span class="title">Title</span><br>
+						<span class="descrip">Description</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="images/a5x.png" alt="">
+						<span class="title">Title</span><br>
+						<span class="descrip">Description</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="images/a6x.png" alt="">
+						<span class="title">Title</span><br>
+						<span class="descrip">Description</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="sub_nav">
+			<ul class="sunit">
+				<li class="cur"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script>
+	//问题：逆序点击时，出现图片部分整体移动。如何让当前图片始终居中，滚动时大图跟着呼吸，始终保持中间的图图为当前图。
+
+		//获取
+		var $carousel = $("#carousel");
+		var $iunit = $carousel.find(".iunit");
+		var $nunit = $carousel.find(".nunit");
+		var $sunit = $carousel.find(".sunit");
+		var idx=0, _idx = 0;
+		var s_idx = 0;
+		//克隆两个list
+		$iunit.find("li").clone().appendTo($iunit);
+		$nunit.find("li").clone().appendTo($nunit);
+
+		var $iunit_lis = $iunit.find("li");
+		var $nunit_lis = $nunit.find("li");
+		var $sunit_lis = $sunit.find("li");
+		//添加鼠标移入监听，给后面加cur添加important否则权重不够行内
+		$nunit_lis.mouseenter(function(){
+			$(this).css("background-color", "rgba(255,255,255,0.3)");
+		});
+		$nunit_lis.mouseleave(function(){
+			$(this).css("background-color", "rgba(0,0,0,0.08)");
+		});
+		//左侧导航部分添加点击监听
+		$nunit_lis.click(function(){
+			//当前点击的下标1-12
+			idx = $(this).index();
+			//排他留己
+			$(this).siblings("li").removeClass("cur");
+			$(this).addClass("cur");
+			
+			//判断下标，当大于7时，下标值减去6，返回1-6
+			if(idx>6){idx-=6;}
+			//加cur时，给clone出来的相对应的自己也加cur
+			$nunit_lis.eq(idx+6).addClass("cur");
+			//添加运动事件，内部判断索引值为6时，still移动，但是移动之后拉回到0
+			$iunit.animate({"left": -980 * idx}, 300, function(){
+				if(idx>5){
+					$(this).css("left", 0);
+				}
+			});
+			//小圆点加cur
+			$sunit_lis.eq(idx).addClass("cur").siblings("li").removeClass("cur");
+		});
+		//小圆点添加点击监听
+		$sunit_lis.click(function(){
+			s_idx = $(this).index();
+			$sunit_lis.eq(s_idx).addClass("cur").siblings("li").removeClass("cur");
+			$iunit.animate({"left": -980 * s_idx}, 300);
+		})
+		//封装函数，定时器开启运动
+		function go(){
+			_idx++;
+
+			$nunit.animate({"top": -70 * _idx}, 300, function(){
+				if(_idx>5){
+					_idx=0;
+					$nunit.css("top", 0);
+				}
+			})
+		}
+
+		var timer = setInterval(go, 1000);
+
+		$carousel.mouseenter(function(){
+			clearInterval(timer);
+		});
+		$carousel.mouseleave(function(){
+			timer = setInterval(go, 1000);
+		});
+
+
+	</script>
+</body>
+</html>
