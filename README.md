@@ -5,4 +5,4 @@
 
 - jQuery-demos 
 
-carousel01：模仿jQuery库中的一个轮播图练习
+    carousel01：模仿jQuery库中的一个轮播图练习
