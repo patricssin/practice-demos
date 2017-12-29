@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>淘宝首页轮播图</title>
+	<link rel="stylesheet" href="css/css.css" />
+</head>
+<body>
+	<div class="carousel" id="carousel">
+		<div class="carousel_images">
+			<ul class="unit">
+				<li>
+					<a href="">
+						<img src="images/1.webp" alt="">
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/2.jpg" alt="">
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/3.jpg" alt="">
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/4.png" alt="">
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/5.webp" alt="">
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="carousel_nav">
+			<ol>
+				<li class="cur"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ol>
+		</div>
+		<div class="carousel_btns">
+			<a href="javascript:;" class="btn left">&lt;</a>
+			<a href="javascript:;" class="btn right">&gt;</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		//得到最大盒子
+		var $carousel = $("#carousel");
+		//得到unit和按钮
+		var $unit = $carousel.find(".unit");
+		var $btn_right = $carousel.find(".carousel_btns .right");
+		var $btn_left = $carousel.find(".carousel_btns .left");
+		var $olist = $carousel.find(".carousel_nav li");
+
+		//克隆一张图，在JS进阶课程上会介绍DOM的上树和下树。
+		//克隆第一张个li，追加到unit里面
+		$unit.find("li:eq(0)").clone().appendTo($unit);
+
+		//信号量
+		var idx = 0;
+		//监听
+		$btn_right.click(function(){
+			//在信号量变化之前检测是否在运动中
+				if($unit.is(":animated")){
+					return;
+				}
+			//idx加1
+			idx ++;
+
+			//为小圆点添加自己的信号量,实现小圆点先动
+			var _idx = idx <= 4 ? idx : 0;
+			//此时的图图为第六张，但是idx变为0
+			$olist.eq(_idx).addClass("cur").siblings("li").removeClass("cur");
+			
+			$unit.stop(true,true).animate({"left" : -520 * idx} , 300 , function(){
+				if(idx > 4){
+					idx = 0;
+					$(this).css("left" , 0);
+				}
+				
+			});
+
+		});
+
+		$btn_left.click(function(){
+			//在信号量变化之前检测是否在运动中
+				if($unit.is(":animated")){
+					return;
+				}
+			//idx减1
+			idx --;
+			//左键先判断是否要拉动到最后一张，不需要在回调函数中验收师傅需要拉回到最后一张
+			if(idx<0){
+				
+				idx = 4;
+				$unit.css("left" , -520 * 5);
+				
+			}
+
+			$unit.stop(true,true).animate({"left" : -520 * idx} , 300);
+			
+			$olist.eq(idx).addClass("cur").siblings("li").removeClass("cur");
+		});
+
+		$olist.click(function(){
+			idx = $(this).index();
+			$unit.stop(true,true).animate({"left" : -520 * idx} , 300);
+
+			$(this).addClass("cur").siblings("li").removeClass("cur");
+		})
+
+
+	</script>
+</body>
+</html>

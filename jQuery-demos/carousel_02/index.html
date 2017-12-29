@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜狐首页轮播图</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div id="carousel">
+		<div class="c_images">
+			<ul>
+				<li style="display: block; background: url(images/1.jpg) center center;"></li>
+				<li style="display: none; background: url(images/2.jpg) center center;"></li>
+				<li style="display: none; background: url(images/3.jpg) center center;"></li>
+				<li style="display: none; background: url(images/4.jpg) center center;"></li>
+				<li style="display: none; background: url(images/5.jpg) center center;"></li>
+			</ul>
+		</div>
+		<div class="c_scarousel">
+			<div class="inner">
+				<a href="javascript:;" class="lbtn"></a>
+				<div class="inner_nav">
+					<ul class="unit">
+						<li class="cur"><a href="javascript:;"><img src="images/s1.jpg" alt=""></a></li>
+						<li><a href="javascript:;"><img src="images/s2.jpg" alt=""></a></li>
+						<li><a href="javascript:;"><img src="images/s3.jpg" alt=""></a></li>
+						<li><a href="javascript:;"><img src="images/s4.jpg" alt=""></a></li>
+						<li><a href="javascript:;"><img src="images/s5.jpg" alt=""></a></li>
+				</div>
+				<a href="javascript:;" class="rbtn"></a>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script>
+		//获取大盒子，左右键
+		var $carousel = $("#carousel");
+		var $lbtn = $carousel.find(".lbtn"),
+			$rbtn = $carousel.find(".rbtn");
+		//获取移动的小图ul，clone内部li
+		var $unit = $carousel.find(".unit");
+		$unit.find("li").clone().appendTo($unit);
+		//clone之后再获取小图li，否则只能获取到clone之前的li
+		var $c_images_lis = $carousel.find(".c_images li");
+		var $inner_nav_lis = $unit.find("li");
+		//定义两个信号量，防止互相干扰
+		var idx = 0,
+			_idx = 0;
+		//右键添加监听，防流氓，信号量变化，运动起来，回调函数中验证信号量是否需要调整，left拉回到0
+		$rbtn.click(function(){
+			if($unit.is(":animated")){
+				return;
+			}
+
+			idx++;
+
+			$unit.animate({"left": -114 * idx}, 300, function(){
+				if (idx>4) {
+					idx = 0;
+					$unit.css("left", 0);
+				}
+			})
+		});
+
+		//左键添加监听，防流氓，信号量变化，if验证时候需要调整将整体拉到克隆的假图的第一个位置，再继续运动
+		$lbtn.click(function(){
+			if($unit.is(":animated")){
+				return;
+			}
+
+			idx--;
+			if (idx<0) {
+				idx = 4;
+				$unit.css("left", -114 * 5);
+			}
+
+			$unit.animate({"left": -114 * idx}, 300)
+		});
+		//小图添加鼠标移入监听
+		$inner_nav_lis.mouseenter(function(){
+			//老图out新图in，信号量在中间变化
+			$c_images_lis.eq(_idx).fadeOut();
+			_idx = $(this).index() % 5;
+			$c_images_lis.eq(_idx).fadeIn();
+			//真假小图都加cur，不能用siblings，so 先全部移除class
+			$inner_nav_lis.removeClass("cur");
+			$inner_nav_lis.eq(_idx).addClass("cur");
+			$inner_nav_lis.eq(_idx + 5).addClass("cur");
+
+		})
+
+	</script>
+</body>
+</html>

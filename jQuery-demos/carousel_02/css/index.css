@@ -1,0 +1,77 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul{
+	list-style: none;
+}
+#carousel{
+	width: 740px;
+	height: 350px;
+	margin: 100px auto;
+	position: relative;
+}
+#carousel .c_images{
+	position: relative;
+
+}
+#carousel .c_images li{
+	width: 740px;
+	height: 350px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#carousel .c_scarousel{
+	position: absolute;
+	width: 100%;
+	height: 120px;
+	bottom: 0;
+	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4) 35%, rgba(0, 0, 0, 0.99));
+}
+#carousel .c_scarousel .inner{
+	position: absolute;
+	bottom: 20px;
+	width: 646px;
+	height: 54px;
+	left: 50%;
+	margin-left: -323px;
+}
+#carousel .c_scarousel .inner .lbtn{
+	float: left;
+	width: 31px;
+	height: 54px;
+	background: url(../images/prev.png) center center;
+}
+#carousel .c_scarousel .inner .rbtn{
+	float: right;
+	width: 31px;
+	height: 54px;
+	background: url(../images/next.png) center center;
+}
+#carousel .c_scarousel .inner .inner_nav{
+	width: 570px;
+	height: 54px;
+	float: left;
+	overflow: hidden;
+	position: relative;
+}
+#carousel .c_scarousel .inner .inner_nav .unit{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 5000px;
+	height: 54px;
+}
+#carousel .c_scarousel .inner .inner_nav .unit li{
+	float: left;
+	width: 92px;
+	height: 47px;
+	margin-left: 20px;
+	padding-top: 7px;
+	padding-left: 2px;
+}
+#carousel .c_scarousel .inner .inner_nav .unit li.cur{
+	background: url(../images/lion.png);
+}
