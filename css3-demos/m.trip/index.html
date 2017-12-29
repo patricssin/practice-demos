@@ -24,8 +24,8 @@
 				</div>
 			</div>
 			<!-- banner part -->
-			<div class="banner">
-				<ul class="unit">
+			<div class="banner swipe" id="slider">
+				<ul class="swipe-wrap unit">
 					<li>
 						<img src="images/700c0m000000dqj376612_1536_307_25.jpg" alt="">
 					</li>
@@ -270,13 +270,18 @@
 	</div>
 
 	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/swipe.js"></script>
 	<script>
-		// var $unit = $(".unit");
-
-		// $unit.find("li:eq(0)").clone().appendTo($unit);
-
-		// $unit.css("left", -3240);
-
+		var slider = Swipe(document.getElementById("slider"),{
+			callback: function(index){
+				$("ol li").eq(index).addClass("cur").siblings().removeClass("cur");
+			}
+		});
+		
+		$("ol li").click(function(){
+			$(this).addClass("cur").siblings().removeClass("cur");
+			slider.slide($(this).index(),400);
+		});
 		
 	</script>
 </body>
