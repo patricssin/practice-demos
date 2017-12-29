@@ -273,9 +273,18 @@
 	<script src="js/swipe.js"></script>
 	<script>
 		var slider = Swipe(document.getElementById("slider"),{
+			startSlide: 1,
+			speed: 400,
+			auto: 1000,
+			continuous: true,
+			//成功过渡之后执行，没有过渡成功不执行
 			callback: function(index){
 				$("ol li").eq(index).addClass("cur").siblings().removeClass("cur");
-			}
+			},
+/*			//动画完成后执行
+			transitionEnd: function(index,elem){
+				
+			}*/
 		});
 		
 		$("ol li").click(function(){

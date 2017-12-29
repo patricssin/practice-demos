@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<title>平台通知</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	ul,li{
+		list-style: none;	
+	}
+	html,body{
+		color: #999;
+		height: 100%;
+		max-width: 540px;
+		margin: 0 auto;
+	}
+	header{
+		width: 100%;
+		height: 40px;
+		line-height: 40px;
+		display: flex;
+		margin: 0 auto;
+	}
+	header span{
+		flex: 1;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	header span.cur{
+		border-bottom: 2px solid #fe560a;
+		color: #fe560a;
+	}
+	.swipe{
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		background: #eee;
+
+		overflow: hidden;
+	}
+	.swipe-wrap{
+		width: 100%;
+		height: 100%;
+		/*padding: 10px;*/
+		box-sizing: border-box;
+	}
+	.swipe .swipe-wrap li{
+		position: relative;
+		float: left;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		padding: 10px;
+
+	}
+	</style>
+</head>
+<body>
+	<header>
+		<span class="cur">交易物流</span>
+		<span>通知</span>
+		<span>互动</span>
+	</header>
+	<section id="slider" class="swipe">
+		<ul class="swipe-wrap">
+			<li></li>
+			<li style="background: #bbb;"></li>
+			<li style="background: #aaa;"></li>
+		</ul>
+	</section>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/swipe.js"></script>
+	<script>
+		var mySwipe = Swipe(document.getElementById('slider'),{
+			speed: 400,
+			callback: function(index){
+				$("span").eq(index).addClass("cur").siblings().removeClass("cur");
+			}
+		});
+		$("header span").click(function(){
+			mySwipe.slide($(this).index(), 400);
+			$(this).addClass("cur").siblings().removeClass("cur");
+		});
+	</script>
+</body>
+</html>
