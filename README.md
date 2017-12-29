@@ -3,7 +3,7 @@
 
 # 目录
 
-- jQuery-demos 
+## jQuery-demos 
 
     1. carousel_01:模仿jQuery库中的一个轮播图练习;
     
@@ -14,7 +14,7 @@
     4. carousel_03:模仿淘宝首页轮播图;
 
 
-- css3-demos
+## css3-demos
 
     1. m.trip: 模仿携程手机端练习flex布局, 添加banner效果(swipe.js);
     
