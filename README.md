@@ -5,13 +5,17 @@
 
 ## jQuery-demos 
 
-    1. carousel_01:模仿jQuery库中的一个轮播图练习;
-    
-    2. accordion:网格手风琴练习;
+    1. accordion:网格手风琴练习;    
+ 
+    2. carousel_01:模仿jQuery库中的一个轮播图练习;
     
     3. carousel_02:模仿搜狐首页轮播图;
     
     4. carousel_03:模仿淘宝首页轮播图;
+ 
+    5. magnifier of JD: 模仿京东商品的鼠标移上放大展示效果;
+ 
+     6. packing box of Smartisan U2 pro: 模仿坚果pro首页包装盒展示效果;
 
 
 ## css3-demos
