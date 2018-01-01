@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	ul{
+		list-style: none;
+	}
+	a{
+		text-decoration: none;
+	}
+	.container{
+		position: relative;
+		margin: 10px auto;
+		width: 1220px;
+		height:950px;	
+		background-color: rgb(198,198,198);	
+		overflow: hidden;
+	}
+	.container a{
+		position: absolute;
+		width: 48px;
+		height: 58px;
+		top: 50%;
+		margin-top: -24px;
+	}
+	.container a.prevbtn{
+		left: 0;
+		background: url(images/prevbtn.png) no-repeat;
+		display: none;
+	}
+	.container a.nextbtn{
+		right: 0;
+		background: url(images/nextbtn.png) no-repeat;
+	}
+	.container ul{
+		position: relative;
+		width: 566px;
+		height: 934px;
+		margin: 0 auto;
+/*		top: 50%;
+		margin-top: -467px;
+		left: 0;
+		right: 0;*/
+	}
+	.container ul li{
+		position: absolute;
+		left: 111px;
+		top: 154px;
+		width: 343px;
+		height: 626px;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<a href="javascript:;" class="prevbtn"></a>
+		<a href="javascript:;" class="nextbtn"></a>
+
+		<ul>
+			<li style="background: url(images/1.png) no-repeat center center; background-size: contain; z-index: 6"></li>
+			<li style="background: url(images/2.png) no-repeat center center; background-size: contain; z-index: 5"></li>
+			<li style="background: url(images/3.png) no-repeat center center; background-size: contain; z-index: 4"></li>
+			<li style="background: url(images/4.png) no-repeat center center; background-size: contain; z-index: 3"></li>
+			<li style="background: url(images/5.png) no-repeat center center; background-size: contain; z-index: 2"></li>
+			<li style="background: url(images/6.png) no-repeat center center; background-size: contain; z-index: 1"></li>
+		</ul>
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script>
+		var $container = $(".container");
+		var $prevbtn = $(".prevbtn");
+		var $nextbtn = $(".nextbtn");
+		var $imglis = $container.find("ul li");
+		var index = 0;
+
+		$nextbtn.click(function(){
+			//点击右键左键出现
+			$prevbtn.show();
+			//如果是第一幅图，动画是向下弹出
+			if(index<1){
+				$imglis.eq(0).animate({"opacity": 0, "top": 500}, 1000);
+			}else{
+				//给除了第一个之外的其他添加动画，放大的宽高是ul的宽高，li设置的是出去了阴影部分的宽高，这样才可以动画resize和重定位，使用了background-size:contain表示保持宽高比让图图填满背景区域，cover是拉大图图填满背景区域。
+				$imglis.eq(index).animate({
+					"top": 0,
+					"left": 0,
+					"width": 566,
+					"height": 934,
+					"opacity": 0
+				}, 1000, function(){
+					$(this).fadeOut();
+				});
+			}		
+			//判断是否已经到最后一张，如果是则隐藏右按钮
+			index++;
+			if(index > 4){
+				$(this).hide();
+				return;
+			}
+		});
+		//左键添加点击事件
+		$prevbtn.click(function(){
+			$nextbtn.show();
+			index--;
+			$imglis.eq(index).fadeIn().animate({
+				"top": 154,
+				"left": 111,
+				"width": 343,
+				"height": 626,
+				"opacity": 1
+			}, 1000);
+
+			if(index<1){
+				$imglis.eq(0).animate({"top": 154, "opacity": 1}, 1000);
+				$prevbtn.hide();
+			}
+		});
+	</script>
+</body>
+</html>

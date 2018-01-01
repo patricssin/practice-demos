@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模仿京东商城放大镜</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.smallbox{
+		width: 350px;
+		height: 350px;
+		position: relative;
+		margin: 100px;
+		border: 1px solid #eee;
+		float: left;
+	}
+	.fangdajing{
+		position: absolute;
+		width: 236px;
+		height: 236px;
+		background: pink;
+		opacity: 0.5;
+		left: 0;
+		top: 0;
+		display: none;
+	}
+	.bigbox{
+		width: 550px;
+		height: 550px;
+		border: 1px solid black;
+		float: left;
+		overflow: hidden;
+		display: none;
+		position: relative;
+	}
+	.bigbox img{
+		position: absolute;
+	}
+	</style>
+</head>
+<body>
+	<div class="smallbox">
+		<img src="images/small.jpg" alt="">
+		<div class="fangdajing"></div>
+	</div>
+	<div class="bigbox">
+		<img src="images/big.jpg" alt="">
+	</div>
+
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script>
+		//获得小盒子到页面边界的距离
+		var smallboxleft = $(".smallbox").offset().left;
+		var smallboxtop = $(".smallbox").offset().top;
+
+		var rate = 550/236;
+		var fangdaWH = 236,
+			smallboxWH = 350;
+
+		var $fangdajing = $(".fangdajing");
+		var $bigbox = $(".bigbox");
+		var $smallbox = $(".smallbox");
+		//添加鼠标移入事件
+		$smallbox.mouseenter(function(){
+			//显示隐藏的放大镜和大盒子
+			$fangdajing.show();
+			$bigbox.show();
+			//在鼠标移入事件内添加鼠标move事件
+			$smallbox.mousemove(function(event){
+				//定义鼠标位置，用当前位置的page值，到页面的边界位置，减去盒子到边界的距离就得到鼠标的实时距离
+				var x = event.pageX - smallboxleft;
+				var y = event.pageY - smallboxtop;
+				//定义放大镜相对于盒子的定位left值，条件判断小于放大镜的一半时，设为0；当大于盒子宽度减去放大镜一半时也就是到了最右边，这时候设置为盒子宽减去放大镜宽；其他时候等于实时值x减去放大镜宽的一半
+				var fangdajingleft = (function(){
+					if(x<fangdaWH/2){
+						return 0;
+					}else if(x>smallboxWH - fangdaWH/2){
+						return smallboxWH - fangdaWH;
+					}else{
+						return x - fangdaWH/2;
+					}
+				})();
+
+				var fangdajingtop = (function(){
+					if(y<fangdaWH/2){
+						return 0;
+					}else if(y>smallboxWH - fangdaWH/2){
+						return smallboxWH - fangdaWH;
+					}else{
+						return y - fangdaWH/2;
+					}
+				})();
+				//给放大镜添加实时的left、top值
+				$fangdajing.css({
+					"left": fangdajingleft,
+					"top": fangdajingtop
+				});
+				//右边大盒子里面的图片根据放大镜的位置，按比例跟着同时变化，比例是图片之间的比例
+				$(".bigbox img").css({
+					"left": -fangdajingleft * rate,
+					"top": -fangdajingtop * rate
+				});
+			})
+		});
+
+		$smallbox.mouseleave(function(){
+			$fangdajing.hide();
+			$bigbox.hide();
+		});
+	</script>
+</body>
+</html>
