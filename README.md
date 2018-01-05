@@ -25,3 +25,5 @@
     1. m.trip: 模仿携程手机端练习flex布局, 添加banner效果(swipe.js);
     
     2. taobao_notification: 利用swipe模仿淘宝移动端通知平台;
+
+    3. cover-follow-the-mouse: 遮罩层跟随鼠标的移动进入和离开每个图片;
