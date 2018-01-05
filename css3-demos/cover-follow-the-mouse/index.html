@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		.wrapper{
+			margin: 100px auto;
+			width: 710px;
+			height: 740px;
+		}
+		.wrapper ul{
+			width: 100%;
+			height: 100%;
+		}
+		.wrapper ul li{
+			float: left;
+			width: 230px;
+			height: 360px;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			position: relative;
+			overflow: hidden;
+			perspective:300px;
+		}
+		.wrapper ul li:nth-child(3n+3){
+			margin-right: 0;
+		}
+		.cover{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: -6000px;
+			background: rgba(0,0,0,.5);
+			display: none;
+		}
+		.cover p{
+			width: 100%;
+			height: 360px;
+			line-height: 360px;
+			font-size: 40px;
+			color: #fff;
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<ul>
+			<li>
+				<img src="images/1.png" alt="">
+				<div class="cover">
+					<p>文字效果</p>
+				</div>
+			</li>
+			<li>
+				<img src="images/2.png" alt="">
+				<div class="cover">
+					<p>文字效果</p>
+				</div>
+			</li>
+			<li>
+				<img src="images/3.png" alt="">
+				<div class="cover">
+					<p>文字效果</p>
+				</div>
+			</li>
+			<li>
+				<img src="images/4.png" alt="">
+				<div class="cover">
+					<p>文字效果</p>
+				</div>
+			</li>
+			<li>
+				<img src="images/5.png" alt="">
+				<div class="cover">
+					<p>文字效果</p>
+				</div>
+			</li>
+			<li>
+				<img src="images/6.png" alt="">
+				<div class="cover">
+					<p>文字效果</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<script src="js/jquery-1.12.4.js"></script>
+	<script>
+		$(".wrapper ul li").mouseenter(function(event){
+			var self = this;
+			move(self, event, "in");
+		});
+		$(".wrapper ul li").mouseleave(function(event){
+			var self = this;
+			move(self, event, "out");
+		});
+		$(".wrapper ul li").mousemove(function(event){
+			var deg = 50;
+			var top = $(this).offset().top;
+			var bottom = $(this).offset().top + $(this).height();
+			var left = $(this).offset().left;
+			var right = $(this).offset().left + $(this).width();
+
+			var rotateX = (event.pageY - top)/$(this).height() * deg * 2 - deg;
+			var rotateY = (event.pageX - left)/$(this).width() * deg * 2 - deg;
+			// console.log(rotateY)
+			$(this).find("p").css({
+				"transform":"rotateX("+rotateX+"deg) rotateY("+ -rotateY+"deg)"
+			});
+		});
+
+		function move(self, event, direction){
+			var t = event.pageY - $(self).offset().top;
+			var b = Math.abs(event.pageY - ($(self).offset().top + $(self).height()));
+			var l = event.pageX - $(self).offset().left;
+			var r = Math.abs(event.pageX - ($(self).offset().left + $(self).width()));
+
+			var min = Math.min(t,b,l,r);
+
+			switch(min){
+				case t:
+				if(direction == "in"){
+					$(self).find(".cover").show().css({
+						top:-360,
+						left:0
+					}).stop(true).animate({
+						top:0,
+						left:0
+					}, 200);
+				}else{
+					$(self).find(".cover").show().css({
+						top:0,
+						left:0
+					}).stop(true).animate({
+						top:-360,
+						left:0
+					}, 200);
+				}
+					
+					break;
+				case b:
+				if(direction == "in"){
+					$(self).find(".cover").show().css({
+						top:360,
+						left:0
+					}).stop(true).animate({
+						top:0,
+						left:0
+					}, 200);
+				}else{
+					$(self).find(".cover").show().css({
+						top:0,
+						left:0
+					}).stop(true).animate({
+						top:360,
+						left:0
+					}, 200);
+				}
+					
+					break;
+				case l:
+				if(direction == "in"){
+					$(self).find(".cover").show().css({
+						top:0,
+						left:-230
+					}).stop(true).animate({
+						top:0,
+						left:0
+					}, 200);
+				}else{
+					$(self).find(".cover").show().css({
+						top:0,
+						left:0
+					}).stop(true).animate({
+						top:0,
+						left:-230
+					}, 200);
+				}
+					
+					break;
+				case r:
+				if(direction == "in"){
+					$(self).find(".cover").show().css({
+						top:0,
+						left:230
+					}).stop(true).animate({
+						top:0,
+						left:0
+					}, 200);
+				}else{
+					$(self).find(".cover").show().css({
+						top:0,
+						left:0
+					}).stop(true).animate({
+						top:0,
+						left:230
+					}, 200);
+				}
+					
+					break;
+			}
+		}
+	</script>
+</body>
+</html>
+
