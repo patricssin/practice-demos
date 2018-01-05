@@ -16,6 +16,8 @@
     5. magnifier of JD: 模仿京东商品的鼠标移上放大展示效果;
  
      6. packing box of Smartisan U2 pro: 模仿坚果pro首页包装盒展示效果;
+  
+    7. ajax-jquery: 利用jQuery的ajax方法模仿126邮箱实现用户名查询和注册;  
 
 
 ## css3-demos

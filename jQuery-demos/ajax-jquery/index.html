@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+	*{
+		margin: 0;
+		padding: 0;
+		/*box-sizing: border-box;*/
+	}
+	.wrapper{
+		width: 200px;
+		height: 174px;
+		border: 1px solid #ccc;
+		margin: 100px;
+		padding: 20px;
+	}
+	.wrapper p{
+		margin-bottom: 10px;
+	}
+	</style>
+</head>
+<body>
+<div class="wrapper">
+	<p>
+		用户名:<input type="text" id="yonghuming">
+		<p id="info"></p>
+	</p>
+	<p>
+		密&nbsp&nbsp&nbsp码:<input type="text" id="mima">
+	</p>
+	<p>
+		<input type="button" value="提交" id="btn">
+	</p>
+</div>
+	
+
+	<script src="jquery-3.2.1.min.js"></script>
+	<script>
+		$("#yonghuming").blur(function(){
+			$.get("system/check.php",{
+				yaochaxundeyonghuming: $("#yonghuming").val()
+			},function(data){
+				if(data == "mei"){
+					$("#info").show().css({
+						"width": 174,
+						"background": "lightyellow",
+						"color": "green"
+					}).html("恭喜，可以注册");
+				$("#btn").attr("diabled", false);
+				}else if(data == "you"){
+					$("#info").show().css({
+						"width": 174,
+						"background": "lightyellow",
+						"color": "red"
+					}).html("已经被注册");
+				$("#btn").attr("diabled", true);
+				}
+			})
+		});
+
+		$("#btn").click(function(){
+			$.post("system/reg.php", {
+				yhm: $("#yonghuming").val(),
+				mm: $("#mima").val()
+			},function(data){
+				if(data == "success"){
+					alert("success");
+					$("#yonghuming ,#mima").val("");
+					$("#info").hide();
+				}else{
+					alert("fail");
+				}
+			})
+		})
+	</script>
+</body>
+</html>
