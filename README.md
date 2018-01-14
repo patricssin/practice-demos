@@ -27,3 +27,13 @@
     2. taobao_notification: 利用swipe模仿淘宝移动端通知平台;
 
     3. cover-follow-the-mouse: 遮罩层跟随鼠标的移动进入和离开每个图片;
+
+
+
+## game-demos
+
+
+    1. retro-snaker: 第一个原生的贪吃蛇小游戏;
+    
+    2. tetris: 俄罗斯方块;
+
