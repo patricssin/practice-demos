@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<audio id="spawn_cell" src="audio/spawn.ogg"></audio>
+	<div id="gameAreaWrapper" width="2000" height="1200">
+        <div id="status"><span class="title">排行榜</span></div>
+        <div class="chatbox" id="chatbox">
+            <ul id="chatList" class="chat-list"></ul>
+            <input id="chatInput" type="text" class="chat-input" placeholder="说点什么..." maxlength="35" />
+        </div>
+		<canvas id="canvas" width="2000" height="1200"></canvas>
+	</div>
+	<div id="startMenuWrapper">
+        <div id="startMenu">
+            <p>球球大作战</p>
+            <input type="text" tabindex="0" autofocus placeholder="输入你的名字" id="playerNameInput" maxlength="25" />
+            <b class="input-error">用户名只能是字母！</b>
+            <br />
+            <a onclick="document.getElementById('spawn_cell').play();"><button id="startButton">开始</button></a>
+            <button id="spectateButton">查看视频</button>
+            <button id="settingsButton">设置</button>
+            <br />
+            <div id="instructions">
+                <h3>游戏说明</h3>
+                <ul>
+                    <li>在屏幕上移动你的鼠标，让角色动起来。</li>
+                    <li>想要扩张自己，就要吃掉比自己小的食物和对手(不能碰比自己大的食物)。</li>
+                    <li>每位玩家的质量等于吃掉的食物和对手的质量和。</li>
+                    <li>提示:尽量让自己变胖，同时要小心任何比自己体积大的。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/Game.js"></script>
+<script src="js/Player.js"></script>
+<script src="js/Food.js"></script>
+<script src="js/Virus.js"></script>
+<script src="js/Background.js"></script>
+<script src="js/Scene.js"></script>
+<script src="js/AI.js"></script>
+
+<script>
+	var game = new Game();
+	var str;
+
+	$("#playerNameInput").on("change", function(){
+		str = $(this).val();
+		setTimeout(function(){
+			game.scene.init(2);
+			game.scene.sceneNum = 2;
+		},100);
+		
+		$("#startMenuWrapper").hide();
+        var $status = $("#status");
+        var statusinner = "<span class = 'title'>排行榜</span><br/><span class = 'me'>AI</span><br/><span class = 'me'>"+ str +"</span>";
+        $status.append(statusinner);
+    });
+
+    var $input = $("#chatInput");
+    $input.on("change", function(){
+        var strname = $("#playerNameInput").val();
+        var $newLine = $("<li>"+ strname + ":" + $input.val() + "</li>");
+        var $newLineAI = $("<li>AI: 你好！</li>");
+        var $chatlist = $("#chatList");
+        if($chatlist.children().length > 9){
+            $("li").eq(0).remove();
+        }
+        $chatlist.append($newLine);
+        $chatlist.append($newLineAI);
+
+        $input.val("");
+    });
+
+/*    var statusinner = "<span class = 'title'>排行榜</span>";
+    for(var i = 0; i < game.playerArr.length; i++){
+        game.playerArr.forEach(function(item){
+
+        })
+    }*/
+
+
+</script>

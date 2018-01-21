@@ -36,4 +36,6 @@
     1. retro-snaker: 第一个原生的贪吃蛇小游戏;
     
     2. tetris: 俄罗斯方块;
+ 
+ 	3. -agar-clone: 用canvas模仿球球大作战的小游戏；
 
