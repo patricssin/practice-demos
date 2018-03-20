@@ -38,4 +38,10 @@
     2. tetris: 俄罗斯方块;
  
     3. -agar-clone: 用canvas模仿球球大作战的小游戏；
+ 
+     4. -paper-plane: 用canvas制作纸飞机游戏；
+
+
+ 
+
 
