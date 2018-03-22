@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>坚果首页</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	ul{
+		list-style: none;
+	}
+	.container{
+		width: 922px;
+		height: 600px;
+		margin: 50px auto;
+		overflow: hidden;
+		border: 1px solid #eee;
+		position: relative;
+	}
+	.container ul{
+		width: 100%;
+		padding-left: 10px;
+		height: 100%;
+		position: relative;
+		top: 250px;
+	}
+	.container ul li{
+		float: left;
+		width: 120px;
+		height: 200px;
+		margin-right: 10px;
+		position: relative;
+	}
+	.container ul li img{
+		width: 120px;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul>
+			<li class="lis" data-pos ="312"><img src="images/01.png"></li>
+			<li class="lis" data-pos ="271"><img src="images/02.png"></li>
+			<li class="lis" data-pos ="327"><img src="images/03.png"></li>
+			<li class="lis" data-pos ="271"><img src="images/04.png"></li>
+			<li class="lis" data-pos ="223"><img src="images/05.png"></li>
+			<li class="lis" data-pos ="260"><img src="images/06.png"></li>
+			<li class="lis" data-pos ="306"><img src="images/07.png"></li>
+		</ul>
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script>
+		var $lis = $(".lis");
+		var $container = $(".container");
+
+		function init(){
+			$lis.each(function(index){
+				$(this).css({"top": $(this).data("pos")});
+			})
+		}
+		init();
+
+		//一个事件each遍历内部元素
+		$container.mousemove(function(event){
+			var mouseX = event.clientX;
+			$lis.each(function(index){
+				var centerX = $(this).offset().left + $(this).width()/2;
+				var diff = Math.abs(mouseX - centerX);
+				$(this).css({"top": diff * 0.3});
+
+			});
+		})
+	</script>
+</body>
+</html>

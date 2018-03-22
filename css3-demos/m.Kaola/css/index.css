@@ -1,0 +1,325 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html{
+	font-size: 100px;
+	width: 100%;
+	height: 100%;
+}
+body{
+	max-width: 640px;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	font-size: .12rem;
+	color: #727273;
+}
+a{
+	text-decoration: none;
+	font-size: 13px;
+	color: #727273;
+}
+ul{
+	list-style: none;
+}
+
+
+/****************** header *******************/
+header{
+	width: 100%;
+	height: .45rem;
+	position: relative;
+}
+header p{
+	position: absolute;
+	width: 83.2%;
+    line-height: .29rem;
+    height: .29rem;
+    color: #727273;
+    border-radius: 5px;
+    font-size: .13rem;
+    background-color: #eaebed;
+    text-align: left;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: .3rem;
+    margin-left: .1rem;
+}
+header p::before{
+	content:"";
+	position: absolute;
+	left: .11rem;
+	top: 50%;
+    transform: translateY(-50%);
+	width: .13rem;
+    height: .29rem;
+    /*line-height: .29rem;*/
+    background: url(../images/search.png) no-repeat;
+    background-position: 0 8px;
+    background-size: contain;
+}
+header a{
+	position: absolute;
+	right: .49rem;
+  	top: 50%;
+    transform: translateY(-50%);
+    width: .38rem;
+    height: .22rem;
+    padding: .05rem 0;
+    text-align: center;
+    color: #e31436;
+    border: 1px solid ;
+    border-radius: 3px;
+    line-height: .1rem;
+    font-size: .13rem;
+}
+header a::after{
+	content:"";
+	position: absolute;
+	left: .5rem;
+	top: 0;
+	width: .2rem;
+    height: .2rem;
+    background: url(../images/bus.png) no-repeat 0 0;
+    background-size: contain;
+}
+/****************** banner *******************/
+section.banner{
+	width: 100%;
+	height: auto;
+	margin-bottom: .1rem;
+}
+section.banner img{
+	width: 100%;
+	height: auto;
+}
+/****************** nav *******************/
+nav{
+	width: 100%;
+	height: .98rem;
+	margin-bottom: .1rem;
+	color: #333;
+}
+nav ul{
+	width: 100%;
+	height: .98rem;
+	display: flex;
+}
+nav ul li{
+	flex: 1 1 25%;
+	position: relative;
+	height: .98rem;
+}
+nav ul li a{
+	width: 100%;
+	height: .18rem;
+	position: absolute;
+	bottom: .03rem;
+	text-align: center;
+	/*padding-bottom: .02rem;*/
+	/*line-height: .18rem;*/
+}
+nav ul li:nth-child(1)::after{
+	content:"";
+	position: absolute;
+	width: 100%;
+	height: .8rem;
+	background: url(../images/nav01.jpg) no-repeat 0 0;
+	background-size: contain;
+}
+nav ul li:nth-child(2)::after{
+	content:"";
+	position: absolute;
+	width: 100%;
+	height: .8rem;
+	background: url(../images/nav02.png) no-repeat 0 0;
+	background-size: contain;
+}
+nav ul li:nth-child(3)::after{
+	content:"";
+	position: absolute;
+	width: 100%;
+	height: .8rem;
+	background: url(../images/nav03.png) no-repeat 0 0;
+	background-size: contain;
+}
+nav ul li:nth-child(4)::after{
+	content:"";
+	position: absolute;
+	width: 100%;
+	height: .8rem;
+	background: url(../images/nav04.jpg) no-repeat 0 0;
+	background-size: contain;
+}
+/****************** special *******************/
+section.special{
+	width: 100%;
+	height: auto;
+	margin: .1rem 0;
+	overflow: hidden;
+}
+section.special p{
+	float: left;
+	width: 50%;
+	height: auto;
+}
+section.special p img{
+	width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+/****************** global *******************/
+section.global{
+	width: 100%;
+	height: auto;
+	padding-top: .2rem;
+	margin-bottom: .2rem;
+}
+section.global p{
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+section.global p img{
+	width: 100%;
+	height: auto;
+}
+section.global p #clock{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%, -50%);
+	font-size: .5rem;
+	color: #fff;
+}
+section.global ul{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+section.global ul li{
+	position: relative;
+	float: left;
+	width: 33.3333333%;
+	height: auto;
+}
+section.global ul li img{
+	width: 100%;
+	height: auto;
+}
+section.global ul li p{
+	width: 100%;
+	height: .3rem;
+	text-overflow: ellipsis;
+/*	overflow: hidden;
+	-webkit-line-clamp:2;
+	display: -webkit-flex;
+	-webkit-box-orient:vertical;*/
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 0 .05rem;
+}
+section.global ul li span{
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: .2rem;
+	text-align: center;
+	color: #f02b2b;
+	left: 50%;
+	transform: translateX(-50%);
+}
+/****************** goods *******************/
+section.goods{
+	width: 100%;
+	height: auto;
+	padding: .03rem .07rem;
+	background: #f8f8f8;
+}
+section.goods ul{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+section.goods ul li{
+	float: left;
+	position: relative;
+	width: 50%;
+	height: auto;
+	padding: .03rem;
+	color: #333;
+}
+section.goods ul li img{
+	width: 100%;
+	height: auto;
+}
+section.goods ul li p{
+	width: 100%;
+	height: .84rem;
+	background: #fff;
+}
+section.goods ul li span:nth-child(1){
+	display: inline-block;
+	margin-top: .01rem;
+	background: #fff;
+	width: 100%;
+	height: .34rem;
+	padding: .02rem .03rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+section.goods ul li span:nth-of-type(2){
+	display: inline-block;
+	color: #d22147;
+	background: #fff;
+	width: 100%;
+	height: .3rem;
+	padding: .01rem .03rem;
+	font-size: .12rem;
+	white-space: nowrap;
+}
+section.goods ul li span:nth-of-type(2)::after{
+	content: "单包￥83.5";
+	vertical-align: middle;
+    display: inline-block;
+    color: #dd1e47;
+    border: .01rem solid;
+    padding: 0 .02rem;
+    border-radius: 2px;
+    background-color: #fff;
+    font-size: .11rem;
+    margin-left: .03rem;
+}
+/****************** footer *******************/
+footer{
+	width: 100%;
+	height: auto;
+	padding: .22rem .15rem;
+    /*line-height: 18px;*/
+    background: #fff;
+    color: #848689;
+}
+footer p{
+	width: 100%;
+	height: .18rem;
+	line-height: .18rem;
+	color: #848689;
+	font-size: .12rem;
+	text-align: center;
+	margin-bottom: .07rem;
+}
+footer p:nth-child(1){
+	font-size: .13rem;
+}
+footer p:nth-child(1) span{
+	margin: 0 .1rem;
+}
+footer p:nth-child(2){
+	color: #999;
+}

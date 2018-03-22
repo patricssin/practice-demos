@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bilibili</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	ul{
+		list-style: none;
+	}
+	a{
+		text-decoration: none;
+		color: black;
+		display: block;
+	}
+	.cover{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, .5);
+		display: none;
+	}
+	.inner{
+		margin: 0 auto;
+		width: 1000px;
+		background: #eee;
+		margin-bottom: 20px;
+
+	}
+	.navbar{
+		position: fixed;
+		width: 40px;
+		top: 50px;
+		border: 1px solid #eee;
+		border-radius: 3px;
+		z-index: 10003;
+	}
+	.navbar li{
+		line-height: 300%;
+		text-align: center;
+	}
+	.navbar li.cur{
+		background: skyblue;
+		color: white;
+	}
+	.navbar li:hover{
+		background: skyblue;
+		color: white;
+	}
+	.navbar .sort{
+		line-height: 50px;
+		text-align: center;
+		border-top: 1px solid #eee;
+	}
+	.navbar .bg{
+		position: absolute;
+		right: -20px;
+		top: -20px;
+		width: 200px;
+		height: 550px;
+		background-color: rgba(255,255,255,0.7);
+		border-radius: 4px;
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<div class="cover"></div>
+	<div class="navbar" id="navbar">
+		<div class="bg"></div>
+		<ul class="nav">
+			<li data-navli="1">直播</li>
+			<li data-navli="2">动画</li>
+			<li data-navli="3">番剧</li>
+			<li data-navli="4">国创</li>
+			<li data-navli="5">音乐</li>
+			<li data-navli="6">舞蹈</li>
+			<li data-navli="7">游戏</li>
+			<li data-navli="8">科技</li>
+			<li data-navli="9">生活</li>
+		</ul>
+		<div class="sort"><a href="javascript:;">排序</a></div>
+	</div>
+	<div class="inner header"  style="height: 300px;"><h3>头部</h3></div>
+	<div class="inner" data-grid="1" style="height: 400px;"><h3>直播</h3></div>
+	<div class="inner" data-grid="2" style="height: 200px;"><h3>动画</h3></div>
+	<div class="inner" data-grid="3" style="height: 360px;"><h3>番剧</h3></div>
+	<div class="inner" data-grid="4" style="height: 150px;"><h3>国创</h3></div>
+	<div class="inner" data-grid="5" style="height: 340px;"><h3>音乐</h3></div>
+	<div class="inner" data-grid="6" style="height: 357px;"><h3>舞蹈</h3></div>
+	<div class="inner" data-grid="7" style="height: 290px;"><h3>游戏</h3></div>
+	<div class="inner" data-grid="8" style="height: 510px;"><h3>科技</h3></div>
+	<div class="inner" data-grid="9" style="height: 620px;"><h3>生活</h3></div>
+
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script>
+
+		//第一件事，nav贴版心，这里要给right实时的值而不能赋给变量，用变量里面的值将不会随着事件改变
+		$("#navbar").css({"right": $(window).width()/2 - 500 - 40});
+		$(window).resize(function(){
+			$("#navbar").css({"right": $(window).width()/2 - 500 - 40});
+		});
+
+		//第二件事,准备高度累加的数组,高度累加的值用于比较实际卷动的高度在哪个区间，如果还在区间内则还在当前位置的grid对应的li加cur
+		var gridHeightArr = [0];
+		var headerHeight = $(".header").outerHeight(true);
+		function setgridHeightArr(){
+			var sum = 0;
+
+			$("div[data-grid]").each(function(){
+				sum += $(this).outerHeight();
+				gridHeightArr.push(sum);
+			});
+		}
+		setgridHeightArr();   //[0, 400, 600, 960, 1110, 1450, 1807, 2097, 2607, 3227]
+		
+		//第三件事，高度累加的数组求出来之后，开始比较实际卷动值和数组中的高度值，例如A=700时，小于i=3的960，大于i=2的600，那么实际滚动的高度使i=3的grid在当前，对应的li：eq（i-1）加cur  eq是从0开始索引
+		$(window).scroll(function(){
+			//这里补一个误差值，有一个问题就是A的值再页面到底时是2454，比数组中2607小，无法比较到最后一个值，因此要加一个可以让页面到底之后有效滚动高度A还比2607大的值，设为160
+			var A = $(window).scrollTop() - headerHeight + 160;
+			if(A<0){
+				$("#navbar ul li").removeClass("cur");
+			}
+			for(var i=1; i<gridHeightArr.length; i++){
+				if(A > gridHeightArr[i - 1] && A < gridHeightArr[i]){
+					break;
+				}				
+			}
+			$("#navbar ul li").eq(i-1).addClass("cur").siblings().removeClass("cur");
+		});
+
+		//第三件事，点击nav蹦到相应版块
+		$(".navbar ul li").click(function(){
+			//得到点击的是哪一层
+			var floor = $(this).data("navli");
+			//求这一层对应的offset()的top值，每一层距离页面顶部的高度
+			var floorHeight = $("div[data-grid = "+ floor +"]").offset().top;
+			//冲锋到点击楼层的位置,这里的属性时scrollTop，不是top，卷动的高度就是前面求得的这一层到顶部的高度值
+			$("html, body").animate({"scrollTop": floorHeight}, 300);
+		});
+
+		//第四件事，拖拽事件，定义三个用来存放下标值得变量
+		var startNum,
+			startIdx,
+			endIdx;
+		$(".navbar ul").sortable({
+			"start": function(event,ui){
+				startNum = ui.item.data("navli");
+				startIdx = ui.item.index();
+			},
+			"stop": function(event, ui){
+				endIdx = ui.item.index();
+
+				if(endIdx > startIdx){
+					//这里的eq只能用：形式，而不能提出来？？？？？？why？？？？？？？到底什么时候用：什么时候可以提出eq()
+					$("div[data-grid="+ startNum +"]").insertBefore("div[data-grid]:eq("+ (endIdx+1) +")");
+				}else{
+					$("div[data-grid="+ startNum +"]").insertBefore("div[data-grid]:eq("+ endIdx +")");
+				}
+
+				setgridHeightArr();
+				$(".navbar ul li").removeClass("cur");
+			}
+		});
+
+		// todo：排序弹出层
+		// $(".sort").click(function(){
+		// 	// $(".nav").css({"z-index": 10005});
+		// 	$(".bg").show();
+		// 	$(".cover").show().css({"z-index": 10000});
+		// 	$(".navbar ul li").removeClass("cur");
+		// })
+
+	</script>
+</body>
+</html>

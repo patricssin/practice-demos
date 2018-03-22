@@ -17,7 +17,12 @@
  
      6. packing box of Smartisan U2 pro: 模仿坚果pro首页包装盒展示效果;
   
-    7. ajax-jquery: 利用jQuery的ajax方法模仿126邮箱实现用户名查询和注册;  
+    7. ajax-jquery: 利用jQuery的ajax方法模仿126邮箱实现用户名查询和注册; 
+ 
+     8. banner of Smartisan U2 Pro：模仿坚果首页banner，实现跟随鼠标移动效果图; 
+
+     9. bilibili-nav: jQueryUI实现b站导航拖拽，页面也随导航移动;
+
 
 
 ## css3-demos
@@ -27,6 +32,12 @@
     2. taobao_notification: 利用swipe模仿淘宝移动端通知平台;
 
     3. cover-follow-the-mouse: 遮罩层跟随鼠标的移动进入和离开每个图片;
+ 
+     4. corner with css3: 利用css3实现鼠标移入，翻角效果;
+  
+      5. m.Kaola: 网易考拉移动端练习flex布局;
+
+
 
 
 

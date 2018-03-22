@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网易考拉</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<p>雅诗兰黛眼霜</p>
+		<a href="javascript:;">登录</a>
+	</header>
+	<!-- header end -->
+	<!-- banner -->
+	<section class="banner">
+		<img src="images/banner01.webp" alt="">
+	</section>
+	<!-- banner end -->
+	<!-- nav -->
+	<nav>
+		<ul>
+			<li><a href="javascript:;">考拉超时</a></li>
+			<li><a href="javascript:;">国家馆</a></li>
+			<li><a href="javascript:;">考拉保障</a></li>
+			<li><a href="javascript:;">拼团</a></li>
+		</ul>
+	</nav>
+	<!-- nav end -->
+	<!-- special -->
+	<section class="special">
+		<p><img src="images/newbird.webp" alt=""></p>
+		<p><img src="images/beautiful.webp" alt=""></p>
+	</section>
+	<!-- special end -->
+	<!-- global -->
+	<section class="global">
+		<span></span>
+		<p><img src="images/counting.webp" alt=""><span id="clock"></span></p>
+		<ul>
+			<li><a href="javascript:;">
+				<img src="images/counting01.webp" alt="">
+				<p>LΛNEIGE 兰芝 睡眠面膜 70毫升/罐 2罐装</p>
+				<span>￥239</span>
+			</a></li>
+			<li><a href="javascript:;">
+				<img src="images/counting02.webp" alt="">
+				<p>阿迪达斯Adidas女鞋三叶草StanSmith史密斯休闲鞋女板鞋小白鞋青年款</p>
+				<span>￥287</span>
+			</a></li>
+			<li><a href="javascript:;">
+				<img src="images/counting03.webp" alt="">
+				<p>Skechers斯凯奇男士绑带休闲鞋 时尚潮流网布拼接运动鞋666028</p>
+				<span>￥284</span>
+			</a></li>
+		</ul>
+	</section>
+	<!-- global end -->
+	<!-- goods -->
+	<section class="goods">
+		<ul>
+			<li><a href="javascript:;">
+				<img src="images/goods01.webp" alt="">
+				<p>
+					<span>Merries 花王妙而舒 L 54片/包 4包装 纸尿裤/尿不湿 </span>
+					<span>售价￥334</span>
+				</p>
+				
+			</a></li>
+			<li><a href="javascript:;">
+				<img src="images/goods02.webp" alt="">
+				<p>
+					<span>LAMY 凌美 safari 狩猎者 F尖钢笔 磨砂黑</span>
+					<span>售价￥334</span>
+				</p>
+				
+			</a></li>
+			<li><a href="javascript:;">
+				<img src="images/goods01.webp" alt="">
+				<p>
+					<span>Merries 花王妙而舒 L 54片/包 4包装 纸尿裤/尿不湿 </span>
+					<span>售价￥334</span>
+				</p>
+				
+			</a></li>
+			<li><a href="javascript:;">
+				<img src="images/goods02.webp" alt="">
+				<p>
+					<span>LAMY 凌美 safari 狩猎者 F尖钢笔 磨砂黑</span>
+					<span>售价￥334</span>
+				</p>
+				
+			</a></li>
+		</ul>
+	</section>
+	<!-- goods end -->
+	<!-- footer -->
+	<footer>
+		<p><span>首页</span> | <span>客户端</span> | <span>登录</span> | <span>注册</span></p>
+		<p>网易公司版权所有@1997-2017</p>
+	</footer>
+</body>
+</html>
+
+<script type="text/javascript">
+
+     (function (doc, win) {
+           var docEl = doc.documentElement,
+                   resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                   recalc = function () {
+                       var clientWidth = docEl.clientWidth;
+                       if (!clientWidth) return;
+                       if(clientWidth>=640){
+                           docEl.style.fontSize = '100px';
+                       }else{
+                           docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                       }
+                   };
+
+           if (!doc.addEventListener) return;
+           win.addEventListener(resizeEvt, recalc, false);
+           doc.addEventListener('DOMContentLoaded', recalc, false);
+       })(document, window);
+
+		function toDou(n){
+				if(n<10){
+					return '0'+n;
+				}else{
+					return ''+n;
+				}
+		}
+
+		var counting = document.getElementById('clock');
+		var timer = setInterval(function(){
+			var diffMs = new Date(2018 , 0 , 1) - new Date();
+			var d = parseInt(diffMs / 86400000);
+			var h = parseInt(diffMs % 86400000 / 3600000);
+			var m = parseInt(diffMs % 3600000 / 60000);
+			var s = parseInt(diffMs % 60000 / 1000);
+			counting.innerHTML = "距本场结束还有" + toDou(h) + ":" + toDou(m) + ":" + toDou(s) ;
+		},1000);
+
+		
+</script>
+
+

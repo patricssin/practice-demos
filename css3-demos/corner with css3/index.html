@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3实现翻角效果</title>
+    <style type="text/css">
+    .cont {
+        width:200px;
+        height:200px;
+        background-color: #fb6542;
+        position: relative;
+        overflow:hidden;
+    }
+    .corner {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: #f98866;
+        width: 0;
+        height: 0;
+        border-radius: 0 0 0 10px;
+        overflow: hidden;
+        transition: 1s all;
+    }
+    .corner-bg {
+        background-color: #2a3132;
+        position: absolute;
+        right: 29.3%;
+        top: 29.3%;
+        width: 141.4%;
+        height: 141.4%;
+        overflow: hidden;
+        transform: rotate(45deg);
+        z-index: 10;
+    }
+    .cont:hover .corner{
+        width: 100px;
+        height: 100px;
+    }
+    .new {
+        position: absolute;
+        right: 17px;
+        top: 17px;
+        color: white;
+        transform: rotate(45deg);
+        z-index: 9;
+    }
+</style>
+</head>
+<body>
+    <div class="cont" >
+        <div class="corner">
+            <p class="new">NEW</p>
+            <div class="corner-bg"></div>
+        </div>
+    </div>
+</body>
+</html>
