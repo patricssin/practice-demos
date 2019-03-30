@@ -6,7 +6,7 @@
 		this.x = game.canvas.width;
 		this.wallDownHeight = parseInt(Math.random() * 101) + 180; //[80,330]
 
-		this.gap = 80;
+		this.gap = 120;
 
 		this.wallUpHeight = game.canvas.height - 90 - this.wallDownHeight - this.gap;
 
